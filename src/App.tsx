@@ -1,4 +1,4 @@
-import { TextInput } from "./components/inputs";
+import { TextInput, RoundButton } from "./components";
 
 function App() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -17,7 +17,8 @@ function App() {
       <TextInput name="city" label="City" />
       <TextInput name="state" label="State" />
       <TextInput name="country" label="Country" />
-      <button type="submit">Submit</button>
+      <RoundButton type="submit" label="Submit" />
+      <RoundButton type="reset" label="Reset" />
     </form>
   );
 }
