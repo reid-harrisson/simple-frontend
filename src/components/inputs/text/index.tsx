@@ -30,12 +30,11 @@ export const TextInput: React.FC<InputProps> = ({ label, className, name }) => {
   };
 
   return (
-    <Container className={className}>
+    <Container className={className} $state={state} $focused={focused}>
       <Label $state={state} $focused={focused}>
         {label}
       </Label>
       <Input
-        $state={state}
         name={name}
         onFocus={handleFocus}
         onBlur={handleBlur}
