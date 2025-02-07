@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+  font-family: "Work Sans";
+  margin: 0;
+  padding: 0;
+  outline: none;
+  line-height: 1.35;
+}
+
+input:-webkit-autofill {
+  transition: background-color 50000s ease-in-out, color 50000s ease-in-out;
+}
+
+.frame {
+  padding: 40px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

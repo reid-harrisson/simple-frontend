@@ -17,7 +17,7 @@ const colors = {
 
 const labelStyles = (state: States) => css`
   color: ${colors.label};
-  margin-top: ${state === States.Default ? "12px" : "4px"};
+  margin-top: ${state === States.Default ? "12px" : "5px"};
   font-size: ${state === States.Default ? "15px" : "12px"};
 `;
 
@@ -27,11 +27,6 @@ const borderStyles = (state: States) => css`
 `;
 
 export const Label = styled.label<{ $state: States; $focused: boolean }>`
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  line-height: 1.35;
   font-size: 15px;
   position: absolute;
   margin-left: 20px;
@@ -45,15 +40,10 @@ export const Label = styled.label<{ $state: States; $focused: boolean }>`
 `;
 
 export const Input = styled.input<{ $state: States }>`
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  line-height: 1.35;
   font-size: 15px;
   color: ${colors.text};
   background-color: transparent;
-  padding: 17px 15px 3px 15px;
+  padding: 18px 15px 2px 15px;
   transition: border 200ms;
   border-radius: 10px;
   font-weight: normal;
@@ -66,11 +56,6 @@ export const Input = styled.input<{ $state: States }>`
 `;
 
 export const Container = styled.div`
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  line-height: 1.35;
   position: relative;
   display: flex;
   flex-direction: column;

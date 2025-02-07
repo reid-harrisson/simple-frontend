@@ -1,4 +1,3 @@
-import "./App.css";
 import { TextInput } from "./components/inputs";
 
 function App() {
