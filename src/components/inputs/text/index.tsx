@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Label, Input, Container, States } from "./styles";
 
-export interface InputProps {
+export interface TextInputProps {
   label: string;
   name: string;
   className?: string;
 }
 
-export const TextInput: React.FC<InputProps> = ({ label, className, name }) => {
+export const TextInput: React.FC<TextInputProps> = ({
+  label,
+  className,
+  name,
+}) => {
   const [value, setValue] = useState("");
   const [focused, setFocused] = useState(false);
   const [state, setState] = useState<States>(
