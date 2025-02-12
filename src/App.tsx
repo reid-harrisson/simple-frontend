@@ -8,8 +8,12 @@ function App() {
     console.log(formData.get("lastname"));
   };
 
+  const handleReset = () => {
+    console.log("Reset button clicked");
+  };
+
   return (
-    <form className="frame" onSubmit={handleSubmit}>
+    <form className="frame" onSubmit={handleSubmit} onReset={handleReset}>
       <TextInput name="firstname" label="First Name" />
       <TextInput name="lastname" label="Last Name" />
       <TextInput name="email" label="Email" />
