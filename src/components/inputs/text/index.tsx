@@ -57,7 +57,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         type={visible ? "password" : "normal"}
       />
       <Button tabIndex={-1} onClick={() => setVisible(!visible)}>
-        {visible ? <Eye /> : <EyeClosed />}
+        {visible ? <Eye size={22} /> : <EyeClosed size={22} />}
       </Button>
     </Container>
   );
