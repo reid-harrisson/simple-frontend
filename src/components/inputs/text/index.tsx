@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Label, Input, Container, States } from "./styles";
+import { Label, Input, Container, Button } from "./styles";
+import { Eye, EyeClosed } from "lucide-react";
 
 export interface TextInputProps {
+  value?: string;
+  setValue?: (value: string) => void;
   label: string;
   name: string;
   className?: string;
@@ -11,40 +14,51 @@ export const TextInput: React.FC<TextInputProps> = ({
   label,
   className,
   name,
+  value,
+  setValue,
 }) => {
-  const [value, setValue] = useState("");
-  const [focused, setFocused] = useState(false);
-  const [state, setState] = useState<States>(
-    value ? States.Filled : States.Default
-  );
+  const [visible, setVisible] = useState(true);
+  const [state, setState] = useState<{
+    isFilled: boolean;
+    isValid: boolean;
+    isFocused: boolean;
+  }>({
+    isFilled: value ? true : false,
+    isValid: true,
+    isFocused: false,
+  });
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    setState(event.target.value ? States.Filled : States.Default);
-    setFocused(false);
+    setState({
+      isValid: event.target.value == "invalid" ? false : true,
+      isFilled: !!event.target.value,
+      isFocused: false,
+    });
   };
 
   const handleFocus = () => {
-    setFocused(true);
-    setState(States.Filled);
+    setState({ ...state, isFocused: true, isFilled: true });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState(States.Filled);
-    setValue(event.target.value);
+    setState({ ...state, isFilled: true });
+    if (setValue) setValue(event.target.value);
   };
 
   return (
-    <Container className={className} $state={state} $focused={focused}>
-      <Label $state={state} $focused={focused}>
-        {label}
-      </Label>
+    <Container className={className} $state={state}>
+      <Label $state={state}>{label}</Label>
       <Input
         name={name}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
         value={value}
+        type={visible ? "password" : "normal"}
       />
+      <Button tabIndex={-1} onClick={() => setVisible(!visible)}>
+        {visible ? <Eye /> : <EyeClosed />}
+      </Button>
     </Container>
   );
 };

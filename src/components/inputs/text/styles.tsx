@@ -1,10 +1,4 @@
-import styled, { css } from "styled-components";
-
-export enum States {
-  Default = "DEFAULT",
-  Filled = "FILLED",
-  Invalid = "INVALID",
-}
+import styled from "styled-components";
 
 const colors = {
   label: "#6F5883",
@@ -15,26 +9,25 @@ const colors = {
   background: "#FFFFFF",
 };
 
-const labelStyles = (state: States) => css`
-  color: ${colors.label};
-  margin-top: ${state === States.Default ? "10px" : "3px"};
-  font-size: ${state === States.Default ? "15px" : "12px"};
-`;
-
-const borderStyles = (state: States) => css`
-  border: 2px solid ${state === States.Invalid ? colors.invalid : colors.border};
-  border-color: ${colors.border};
-`;
-
-export const Label = styled.label<{ $state: States; $focused: boolean }>`
+export const Label = styled.label<{
+  $state: {
+    isFilled: boolean;
+    isValid: boolean;
+    isFocused: boolean;
+  };
+}>`
   font-size: 15px;
   position: absolute;
   margin-left: 20px;
   font-weight: 500;
   transition: all 200ms;
-  ${({ $state }) => labelStyles($state)}
-  color: ${({ $focused, $state }) =>
-    $focused && $state === States.Filled ? colors.focused : colors.label};
+  color: ${({ $state }) => {
+    if ($state.isFilled && $state.isFocused) return colors.focused;
+    if (!$state.isValid) return colors.invalid;
+    return colors.label;
+  }};
+  top: ${({ $state }) => ($state.isFilled ? 3 : 10)}px;
+  font-size: ${({ $state }) => ($state.isFilled ? 12 : 15)}px;
 `;
 
 export const Input = styled.input`
@@ -42,13 +35,39 @@ export const Input = styled.input`
   font-size: 15px;
   color: ${colors.text};
   background-color: transparent;
-  padding: 18px 15px 2px 15px;
+  padding: 18px 45px 2px 15px;
   font-weight: normal;
   z-index: 1;
   width: 100%;
 `;
 
-export const Container = styled.div<{ $state: States; $focused: boolean }>`
+export const Button = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: ${colors.label};
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 0.4;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+`;
+
+export const Container = styled.div<{
+  $state: {
+    isFilled: boolean;
+    isValid: boolean;
+    isFocused: boolean;
+  };
+}>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -56,7 +75,10 @@ export const Container = styled.div<{ $state: States; $focused: boolean }>`
   background-color: ${colors.background};
   transition: border 200ms;
   border-radius: 10px;
-  ${({ $state }) => borderStyles($state)}
-  border-color: ${({ $focused, $state }) =>
-    $focused && $state === States.Filled ? colors.focused : colors.border};
+  border: 2px solid;
+  border-color: ${({ $state }) => {
+    if ($state.isFocused) return colors.focused;
+    if (!$state.isValid) return colors.invalid;
+    return colors.border;
+  }};
 `;
