@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
 const colors = {
+  label: "#525252",
+  text: "#4b4b4b",
+  focused: "#1E90FF",
+  invalid: "#FF0000",
+  border: "#5252521a",
+  background: "#FFFFFF",
+};
+
+const _ = {
   label: "#6F5883",
   text: "#5B415B",
   focused: "#1E90FF",
@@ -43,7 +52,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   position: absolute;
-  top: 8px;
+  top: 9px;
   right: 15px;
   background: transparent;
   border: none;

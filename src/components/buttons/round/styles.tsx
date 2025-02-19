@@ -2,6 +2,12 @@ import styled, { css } from "styled-components";
 
 const colors = {
   label: "#FFFFFF",
+  shadow: "#292929C2",
+  background: "#292929",
+};
+
+const _ = {
+  label: "#FFFFFF",
   shadow: "#D3126E",
   background: "#D3126E",
 };
@@ -23,8 +29,8 @@ const buttonStyles = css`
 const opacties = {
   default: 1,
   hover: 0.8,
-  active: 0.6,
-  disabled: 0.6,
+  active: 0.7,
+  disabled: 0.7,
 };
 
 export const Container = styled.button`
@@ -34,7 +40,7 @@ export const Container = styled.button`
   opacity: ${opacties.default};
   transition: all 200ms;
   &:focus {
-    box-shadow: 0px 0px 7px ${colors.shadow};
+    opacity: ${opacties.hover};
   }
   &:hover {
     opacity: ${opacties.hover};
